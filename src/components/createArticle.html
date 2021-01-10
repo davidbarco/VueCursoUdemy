@@ -1,0 +1,62 @@
+<!-- separo la template del archivo vue. -->
+<div class="general">
+    <!-- props. texto="blog" coloco una props en el componente del slider, luego me voy al slider y recibo esa props-->
+   
+    <div class="center">
+      <section id="content">
+        <h2 class="subheader" v-if="!isEdit">Crear Articulo</h2>
+        <h2 class="subheader" v-else>Editar Articulo</h2>
+      
+      <!-- formulario. -->
+      <!-- para vincular el formulario le definimos el evento onsubmit -->
+      <form action="" class="mid-form" @submit.prevent="save()">
+        <div class="from-group">
+            <label for="title">Titulo</label>
+            <input type="text" name="title" id="" v-model="article.title">
+            <!-- mensajes de validacion del formulario -->
+            <div v-if="submitted && !$v.article.title.required">
+               el titulo debe tener algo!!
+            </div>
+
+        </div>
+
+        <div class="from-group">
+            <label for="content">contenido</label>
+            <textarea name="content"  v-model="article.content"></textarea>
+            <!-- mensajes de validacion del formulario -->
+            <div v-if="submitted && !$v.article.content.required">
+               el contenido debe tener algo!!
+            </div>
+        </div>
+
+         <!-- para subir la imagen nos creamos el metodo. tambien creamos un id y un ref -->
+        <div class="from-group">
+     
+            <label for="image">imagen</label>
+            <!-- se pone file0 porque el metodo del backend resive ese dato cuando lo probamos por postman y es el que creamos. en el controllers. -->
+            <input type="file" name="file0" id="file" ref="file" @change="fileChange()">
+        
+        </div>
+         <!-- condicion para que me muestre la imagen en la pagina de editar -->
+             <div v-if="isEdit && article.image">
+              <img
+              class="image-small"
+              :src="url + 'get-image/' + article.image"
+              :alt="article.title"
+              v-if="article.image"
+            />
+             </div>
+
+
+        <div class="clearfix"></div>
+
+        <input type="submit" value="Crear" class="btn btn-success">
+        
+      </form>
+
+
+      </section>
+      <Sidebar></Sidebar>
+      <div class="clearfix"></div>
+    </div>
+  </div>
