@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+el backend de este proyecto se encuentra en el repositorio de AngularMasterUdemy, la carpeta backend funciona con este proyecto.
